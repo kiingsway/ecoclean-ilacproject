@@ -6,8 +6,13 @@ import Home from './pages/Home'
 import LowercaseRedirect from './features/LowercaseRedirect'
 import Contact from './pages/Contact'
 import Blog from './pages/Blog'
+import { inject } from "@vercel/analytics"
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 function App() {
+  inject()
+  injectSpeedInsights()
+
   return (
     <BrowserRouter>
       <LowercaseRedirect />
