@@ -1,0 +1,408 @@
+.page {
+  padding-top: var(--nav-h);
+}
+
+// ── Page Header ───────────────────────────
+.header {
+  background: var(--green);
+  padding: 4rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 30%, rgba(0,0,0,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+}
+
+.header-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  animation: fadeUp 0.6s ease both;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 99px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.h1-list {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.header-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.75;
+}
+
+.header-wave {
+  display: block;
+  width: 100%;
+  margin-bottom: -4px;
+}
+
+// ── Blog list ─────────────────────────────
+.list-section {
+  background: var(--white);
+  padding: 4rem 2rem 5rem;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.post-card {
+  background: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+
+    .post-card-title { color: var(--green-dark); }
+    .read-more { gap: 10px; }
+  }
+}
+
+.post-card-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+
+.post-card-body {
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.post-tag {
+  display: inline-block;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(76,175,80,0.2);
+}
+
+.post-card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-dark);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s;
+}
+
+.post-card-excerpt {
+  font-size: 0.88rem;
+  color: var(--gray-mid);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--gray-mid);
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+}
+
+.read-more {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green-dark);
+  font-weight: 600;
+  font-size: 0.82rem;
+  transition: gap 0.2s;
+}
+
+// ── Article view ──────────────────────────
+.article-wrap {
+  background: var(--white);
+  padding: 4rem 2rem 5rem;
+}
+
+.article-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  padding: 0;
+  transition: gap 0.2s;
+
+  &:hover { gap: 10px; }
+}
+
+.article-tag {
+  display: inline-block;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(76,175,80,0.2);
+}
+
+.article-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--gray-dark);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    flex-shrink: 0;
+  }
+
+  &-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+  }
+
+  &-role {
+    font-size: 0.78rem;
+    color: var(--gray-mid);
+  }
+}
+
+.article-info {
+  display: flex;
+  gap: 1.25rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+
+  span {
+    font-size: 0.82rem;
+    color: var(--gray-mid);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+// Article body typography
+.article-body {
+  font-size: 1.05rem;
+  color: var(--gray-dark);
+  line-height: 1.85;
+
+  p { margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--gray-dark);
+    margin: 2.5rem 0 0.85rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin: 2rem 0 0.6rem;
+  }
+
+  strong { color: var(--green-dark); font-weight: 600; }
+
+  a {
+    color: var(--green-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+    &:hover { color: var(--green); }
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.75;
+    }
+  }
+
+  ul li { list-style: disc; }
+  ol li { list-style: decimal; }
+
+  blockquote {
+    border-left: 4px solid var(--green);
+    padding: 0.75rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--green-pale);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+
+    p {
+      margin: 0;
+      font-style: italic;
+      color: var(--green-dark);
+      font-size: 1.05rem;
+    }
+  }
+}
+
+// ── CTA banner inside article ─────────────
+.article-cta {
+  margin-top: 3rem;
+  background: var(--green-dark);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2rem;
+  text-align: center;
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.8rem 1.75rem;
+  background: var(--white);
+  color: var(--green-dark);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.18s, box-shadow 0.18s;
+
+  &:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+}
+
+// ── Animations ────────────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .header       { padding: 3rem 1.25rem 4rem; }
+  .list-section { padding: 2.5rem 1.25rem 3.5rem; }
+  .article-wrap { padding: 2.5rem 1.25rem 3.5rem; }
+  .article-info { margin-left: 0; }
+}
