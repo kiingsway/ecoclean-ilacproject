@@ -1,73 +1,159 @@
-# React + TypeScript + Vite
+# EcoClean Toronto 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a college major assignment project for a Digital Marketing / SEO course. The goal of this project is to demonstrate understanding of website creation, basic SEO principles, keyword planning, and content structure using a fictional business.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Project Purpose
 
-## React Compiler
+This project was created for academic purposes and is not a real business. It simulates a small business website to practice:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React website development
+- SEO fundamentals (titles, meta descriptions, headings, keywords)
+- Content writing for marketing
+- Buyer persona creation
+- Keyword research and planning
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🌐 Website Pages
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🏠 Home Page
+- Introduction to EcoClean Toronto (fictional eco-friendly cleaning service)
+- Overview of services
+- Value proposition (eco-friendly and safe cleaning)
+- Call-to-action buttons:
+  - Book Now
+  - Get Free Quote
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📞 Contact Page
+- Contact form (Name, Email, Message)
+- Fictional business details:
+  - Address: 123 Green St, Toronto, ON
+  - Phone: (416) 555-1234
+  - Email: info@ecoclean.ca
+- Short message encouraging users to reach out
+
+---
+
+### 📝 Blog Page
+- One blog post (300–500 words)
+- Topic: eco-friendly cleaning in Toronto
+- Includes:
+  - Headings (H1, H2)
+  - Keyword optimization
+  - Internal link to Contact page
+  - Meta description
+
+---
+
+## 🎯 Target Audience (Buyer Persona)
+
+**VALS Type:** Experiencers + Achievers  
+
+- Age: 25–45  
+- Location: Toronto  
+- Occupation: Professionals  
+- Interests: Lifestyle, wellness, sustainability  
+- Behavior: Searches online before booking services  
+- Motivation: Convenience, cleanliness, eco-friendly lifestyle  
+
+---
+
+## 🔑 SEO Strategy (Assignment Requirement)
+
+This project applies basic on-page SEO concepts:
+
+- Title tags for each page
+- Meta descriptions including keywords
+- Keyword usage in headings and content
+- Image alt text
+- Internal linking between pages
+- Clean URL structure:
+  - `/`
+  - `/contact`
+  - `/blog`
+
+**Main keyword used throughout the project:**
+- eco-friendly cleaning Toronto
+
+---
+
+## 🎨 Brand Identity
+
+### Brand Voice
+- Friendly  
+- Professional  
+- Trustworthy  
+- Eco-conscious  
+- Helpful  
+
+### Colour Palette
+- Green: `#4CAF50`
+- White: `#FFFFFF`
+- Light Blue: `#E3F2FD`
+- Dark Gray: `#333333`
+- Soft Beige: `#F5F5DC`
+
+---
+
+## 🧱 Tech Stack
+
+- React (Vite)
+- React Router DOM
+- SCSS Modules
+- React Helmet Async (for SEO metadata management)
+
+---
+
+## 🚀 How to Run the Project
+
+### Install dependencies
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+src/
+  components/
+  pages/
+    Home/
+    Contact/
+    Blog/
+  styles/
+  App.jsx
+  main.jsx
+```
+
+---
+
+## 📌 Important Note
+
+This project was developed as a **college assignment** to demonstrate understanding of:
+
+* Website structure
+* Basic SEO implementation
+* Content strategy
+* Front-end development using React
+
+It is not intended for real commercial use.
+
+---
