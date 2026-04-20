@@ -8,6 +8,7 @@ import Contact from './pages/Contact'
 import Blog from './pages/Blog'
 import { inject } from "@vercel/analytics"
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import { ScrollToTop } from './features/ScrollToTop'
 
 function App() {
   inject()
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <LowercaseRedirect />
       <Navbar />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<Home />} />
