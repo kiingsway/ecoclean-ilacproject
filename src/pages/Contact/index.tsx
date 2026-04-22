@@ -30,6 +30,8 @@ export default function Contact() {
   const [form, setForm] = useState<IContactInfo>(INITIAL)
   const [submitted, setSubmitted] = useState(false)
   const [loading, { setTrue: startLoad, setFalse: stopLoad }] = useBoolean()
+  const [debugMode, { setTrue: startDebug, setFalse: stopDebug }] = useBoolean()
+
 
   const tError = (msg: string) => toast.error(msg, {
     style: {
@@ -60,19 +62,20 @@ export default function Contact() {
     try {
       startLoad()
       const resp = await handleContactSubmit(form)
-      toast.success(resp.message)
+      if (debugMode) toast.success(resp.message)
       setSubmitted(true)
     } catch (err) {
       console.error('error', err)
       tError('Sorry, your message could not be sent. Please try again later 🥀')
     } finally {
       stopLoad()
+      stopDebug()
     }
   }
 
   const fillForm = (): void => {
-    const contactInfo = generateRandomContactInfo()
-    setForm(contactInfo)
+    startDebug()
+    setForm(generateRandomContactInfo())
   }
 
   return (
