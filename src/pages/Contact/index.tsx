@@ -1,17 +1,13 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import s from './Contact.module.scss'
 import { Helmet } from 'react-helmet-async'
+import type { IContactInfo } from '../../types/interfaces'
+import toast, { Toaster } from 'react-hot-toast'
+import { generateRandomContactInfo } from '../../services/generateRandomContactInfo'
+import useBoolean from '../../hooks/useBoolean'
+import { handleContactSubmit } from '../../services/handleContactSubmit'
 
-interface FormData {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  service: string
-  message: string
-}
-
-const INITIAL: FormData = {
+const INITIAL: IContactInfo = {
   firstName: '',
   lastName: '',
   email: '',
@@ -30,19 +26,53 @@ const services = [
 ]
 
 export default function Contact() {
-  const [form, setForm] = useState<FormData>(INITIAL)
-  const [loading, setLoading] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [form, setForm] = useState<IContactInfo>(INITIAL)
   const [submitted, setSubmitted] = useState(false)
+  const [loading, { setTrue: startLoad, setFalse: stopLoad }] = useBoolean()
 
-  const set = (field: keyof FormData) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+  const tError = (msg: string) => toast.error(msg, {
+    style: {
+      background: "#fee2e2",
+      color: '#7f1d1d',
+      border: '1px solid #fecaca'
+    }
+  })
+
+  const set = (field: keyof IContactInfo) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm(prev => ({ ...prev, [field]: e.target.value }))
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    // Simulate async submit — replace with real API call
-    setTimeout(() => { setLoading(false); setSubmitted(true) }, 1200)
+  const handleSubmit = async () => {
+    const formEl = formRef.current
+    if (!formEl) return
+
+    if (!formEl.checkValidity()) {
+      formEl.reportValidity()
+      return
+    }
+
+    if (!form.firstName || !form.lastName || !form.email || !form.message) {
+      tError("Please complete all required fields.");
+      return;
+    }
+
+    try {
+      startLoad()
+      const resp = await handleContactSubmit(form)
+      toast.success(resp.message)
+      setSubmitted(true)
+    } catch (err) {
+      console.error('error', err)
+      tError('Sorry, your message could not be sent. Please try again later 🥀')
+    } finally {
+      stopLoad()
+    }
+  }
+
+  const fillForm = (): void => {
+    const contactInfo = generateRandomContactInfo()
+    setForm(contactInfo)
   }
 
   return (
@@ -54,6 +84,8 @@ export default function Contact() {
           content="Read EcoClean Toronto's blog for expert tips on eco-friendly cleaning in Toronto, healthier homes, and sustainable living. Discover practical advice, safe cleaning methods, and ways to maintain a clean home while protecting your family and the environment."
         />
       </Helmet>
+
+      <Toaster position="bottom-right" />
 
       <main className={s.page}>
 
@@ -144,11 +176,11 @@ export default function Contact() {
               ) : (
                 <>
                   <h2 className={s['form-title']}>Send us a message</h2>
-                  <p className={s['form-sub']}>
+                  <p className={s['form-sub']} onDoubleClick={fillForm}>
                     Fill in the form below and we'll respond within 24 hours.
                   </p>
 
-                  <form className={s.form} onSubmit={handleSubmit} noValidate>
+                  <form ref={formRef} onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
 
                     <div className={s['form-row']}>
                       <div className={s.field}>
