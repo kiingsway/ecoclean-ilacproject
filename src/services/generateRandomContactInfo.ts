@@ -1,23 +1,8 @@
 import type { IContactInfo, IServices } from "../types/interfaces"
+import generateRandomPhoneNumber from "./randomizers/generateRandomPhoneNumber"
 
 const firstNames = ["Lucas", "Mariana", "João", "Alice", "Roberto", "Carla", "Diego", "Beatriz", "Gabriel", "Fernanda", "Ricardo", "Juliana", "Henrique"]
 const lastNames = ["Silva", "Oliveira", "Santos", "Ferreira", "Gomes", "Alves", "Rocha", "Martins", "Costa", "Pereira", "Souza", "Lima", "Carvalho"]
-
-const phones = [
-  "+55 11 98765-4321",
-  "+55 21 99876-1234",
-  "+55 31 91234-5678",
-  "+55 11 99988-7766",
-  "+55 41 98877-6655",
-  "+55 51 97766-5544",
-  "+55 71 96655-4433",
-  "+55 61 95544-3322",
-  "+55 81 94433-2211",
-  "+55 48 93322-1100",
-  "+55 92 92211-0099",
-  "+55 62 91100-9988",
-  "+55 85 90099-8877"
-]
 
 const messages = [
   "I would like to request a quote for my project.",
@@ -61,7 +46,7 @@ export function generateRandomContactInfo(): IContactInfo {
     firstName,
     lastName,
     email,
-    phone: pick(phones),
+    phone: generateRandomPhoneNumber(),
     service: pick(services),
     message: pick(messages)
   }

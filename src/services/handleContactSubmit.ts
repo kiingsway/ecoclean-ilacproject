@@ -17,8 +17,6 @@ export default async function handleContactSubmit(contact: IContactInfo): Promis
     ...deviceInfo,
   }
 
-  console.log('payload', payload)
-
   const { error } = await supabase.from('contacts').insert(payload)
 
   if (error) {
