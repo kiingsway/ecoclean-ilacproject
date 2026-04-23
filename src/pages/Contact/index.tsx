@@ -5,7 +5,7 @@ import type { IContactInfo } from '../../types/interfaces'
 import toast, { Toaster } from 'react-hot-toast'
 import { generateRandomContactInfo } from '../../services/generateRandomContactInfo'
 import useBoolean from '../../hooks/useBoolean'
-import { handleContactSubmit } from '../../services/handleContactSubmit'
+import handleContactSubmit from '../../services/handleContactSubmit'
 
 const INITIAL: IContactInfo = {
   firstName: '',
@@ -61,8 +61,9 @@ export default function Contact() {
 
     try {
       startLoad()
+      // const resp = await handleContactSubmitFake(form)
       const resp = await handleContactSubmit(form)
-      if (debugMode) toast.success(resp.message)
+      if (debugMode) toast.success(resp)
       setSubmitted(true)
     } catch (err) {
       console.error('error', err)

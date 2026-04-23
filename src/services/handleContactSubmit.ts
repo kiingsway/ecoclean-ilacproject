@@ -1,39 +1,35 @@
-import type { IContactInfo } from "../types/interfaces"
+import { getDeviceInfo } from '../helpers/getDeviceInfo'
+import maskEmail from '../helpers/maskEmail'
+import maskPhone from '../helpers/maskPhone'
+import { supabase } from '../lib/supabase'
+import type { IContactInfo } from '../types/interfaces'
 
-export function handleContactSubmit(
-  contact: IContactInfo
-): Promise<{ success: boolean; message: string }> {
-  const maskEmail = (email: string) => {
-    const [name, domain] = email.split("@")
+export default async function handleContactSubmit(contact: IContactInfo): Promise<string> {
+  const deviceInfo = await getDeviceInfo()
 
-    const visibleStart = name.slice(0, 2)
-    const visibleEnd = name.slice(-1)
-
-    const maskedName = `${visibleStart}*****${visibleEnd}`
-
-    return `${maskedName}@${domain}`
+  const payload = {
+    first_name: contact.firstName,
+    last_name: contact.lastName,
+    email: contact.email,
+    phone: contact.phone,
+    service: contact.service || null,
+    message: contact.message || null,
+    ...deviceInfo,
   }
 
-  const maskPhone = (phone: string) => {
-    const digits = phone.replace(/\D/g, "")
+  console.log('payload', payload)
 
-    const visibleStart = digits.slice(0, 2)
-    const visibleEnd = digits.slice(-2)
+  const { error } = await supabase.from('contacts').insert(payload)
 
-    return `${visibleStart}*****${visibleEnd}`
+  if (error) {
+    console.error('Erro ao salvar contato:', error?.message)
+    throw new Error(error?.message)
   }
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const fullName = `${contact.firstName} ${contact.lastName}`
-      const maskedEmail = maskEmail(contact.email)
-      const maskedPhone = maskPhone(contact.phone)
-      const service = contact.service || "Not specified"
+  const fullName = `${contact.firstName} ${contact.lastName}`
+  const maskedEmail = maskEmail(contact.email)
+  const maskedPhone = maskPhone(contact.phone)
+  const service = contact.service || "Not specified"
 
-      resolve({
-        success: true,
-        message: `Your contact request has been successfully submitted. Details: ${fullName} (${maskedEmail}), Phone: ${maskedPhone}, Service: ${service}.`
-      })
-    }, 1200)
-  })
+  return `Your contact request has been successfully submitted. Details: ${fullName} (${maskedEmail}), Phone: ${maskedPhone}, Service: ${service}.`
 }
